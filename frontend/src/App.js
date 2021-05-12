@@ -23,10 +23,14 @@ function App() {
   };
 
   useEffect(() => {
-    axios.get(`/Button1`).then((response) => {
-      setPressed(response.data.state);
-      setClicks(response.data.clickCount);
-    });
+    axios
+      .get(`/Button1`)
+      .then((response) => {
+        console.log('RESPONSE:', response.data);
+        setPressed(response.data.state);
+        setClicks(response.data.clickCount);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
