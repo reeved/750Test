@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.button{
+    padding: 1em;
+    width: 20vw;
+    text-align: center;
+    border-radius: 0.5em;
+    color: white;
+    font-size: 2em;
+    background: linear-gradient(to right, #c31432, #240b36);
+    transition-duration: 0.3s;
+    transition-property: box-shadow, transform;
+    user-select: none;
+}
+
+.button:hover{
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.8);
+    transform: scale(1.05);
+}
+
+.pressed{
+    background: linear-gradient(to right, #f12711, #f5af19);
+    color:black
+}
