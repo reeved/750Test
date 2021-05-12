@@ -1,12 +1,19 @@
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './App.module.css';
 
 function App() {
-  const dbServerURI = 'http://localhost:3001';
-  const pressed = 0;
+  const [pressed, setPressed] = useState(null);
 
   const handleClick = () => {
-    axios.get(`/21`).then((response) => console.log(response));
+    axios.get(`/21`).then((response) => {
+      console.log(response.data);
+      setPressed(!response.data.state);
+    });
+    const body = {
+      newState: !pressed,
+    };
+    axios.put(`/21`, body);
   };
 
   return (
