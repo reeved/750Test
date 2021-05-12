@@ -8,7 +8,10 @@ const buttonSchema = new Schema(
       unique: true,
       required: [true, 'Button name not received.'],
     },
-    state: { type: String, required: [true, 'No state information received.'] },
+    state: {
+      type: Boolean,
+      required: [true, 'No state information received.'],
+    },
   },
   {
     timestamps: {},
