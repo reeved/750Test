@@ -1,5 +1,16 @@
 import mongoose from 'mongoose';
-
 const Schema = mongoose.Schema;
 
-// TODO Your schema here. Remember to export it!
+const buttonSchema = new Schema(
+  {
+    buttonName: { type: String, unique: true },
+    state: String,
+  },
+  {
+    timestamps: {},
+  }
+);
+
+export const Button = mongoose.model('Button', buttonSchema);
+
+const button = new Button();
