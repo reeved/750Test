@@ -48,25 +48,20 @@ function App() {
 
       <div className={styles.container}>
         <div className={styles.buttonContainer}>
-          <div
-            className={`${styles.button} ${pressed ? styles.pressed : ''}`}
-            onClick={() => handleClick()}
-          >
-            {pressed === null ? (
-              <>
-                <Spinner animation='border' />
-              </>
-            ) : pressed ? (
-              `Button is Pressed`
-            ) : (
-              'Button is Unpressed'
-            )}
-          </div>
-          <h3>
-            {pressed === null
-              ? `Loading...`
-              : `Button has been clicked ${nClicks} times`}
-          </h3>
+          {pressed === null ? (
+            <Spinner animation='border' />
+          ) : (
+            <>
+              <div
+                className={`${styles.button} ${pressed ? styles.pressed : ''}`}
+                onClick={() => handleClick()}
+              >
+                {pressed ? `Button is Pressed` : 'Button is Unpressed'}
+              </div>
+
+              <h3>{`Button has been clicked ${nClicks} times`}</h3>
+            </>
+          )}
         </div>
 
         <div className={styles.credits}>
