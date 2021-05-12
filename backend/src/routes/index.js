@@ -14,20 +14,29 @@ async function retrieveButton(name) {
   return await Button.findOne({ buttonName: name });
 }
 
-async function updateButton(name) {
+async function updateButton(name, newState) {
   // Retrieves a button from the DB based on its {buttonName} property
-  const button = await Button.findOne({ buttonName: name });
+  const dbButton = await Button.findOne({ buttonName: name });
+  console.log('Button: ', dbButton, name);
 
-  if (button) {
-    console.log('Button State:', button.state);
+  if (dbButton) {
+    console.log('Button State:', dbButton.state);
+    dbButton.state = newState;
+
+    await dbButton.save();
+    console.log('Successfully updated Button');
+
+    return true;
   }
+
+  return false;
 }
 
 router.get('/:btnName', async (req, res) => {
   const { btnName } = req.params;
 
   const button = await retrieveButton(btnName);
-  console.log('Button: ', button);
+  // console.log('Button: ', button);
 
   if (button) {
     res.json(button);
@@ -40,10 +49,11 @@ router.get('/:btnName', async (req, res) => {
 });
 
 router.put('/:btnName', async (req, res) => {
+  console.log('RECEIVED PUT REQUEST:', req.body.newState);
   const { btnName } = req.params;
-  const button = req.body;
-  article._id = id;
-  constsuccess = awaitupdateArticle(article);
+  const newState = req.body.newState;
+  // article._id = id;
+  const success = await updateButton(btnName, newState);
   res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_NOT_FOUND);
 });
 
