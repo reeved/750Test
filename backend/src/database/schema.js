@@ -3,14 +3,18 @@ const Schema = mongoose.Schema;
 
 const buttonSchema = new Schema(
   {
-    buttonName: { type: String, unique: true },
-    state: String,
+    buttonName: {
+      type: String,
+      unique: true,
+      required: [true, 'Button name not received.'],
+    },
+    state: { type: String, required: [true, 'No state information received.'] },
   },
   {
     timestamps: {},
   }
 );
 
-export const Button = mongoose.model('Button', buttonSchema);
+const Button = mongoose.model('Button', buttonSchema, 'Buttons');
 
-const button = new Button();
+export { Button };
