@@ -9,29 +9,20 @@ import Particles from 'react-tsparticles';
 function App() {
   const [pressed, setPressed] = useState(null);
 
-  const getButtonState = () => {
-    axios.get(`/21`).then((response) => {
-      console.log(response.data);
-      setPressed(response.data.state);
-    });
-  };
-
-  const setButtonState = () => {
-    const body = {
-      newState: !pressed,
-    };
-    axios.put(`/21`, body);
-  };
-
   const handleClick = () => {
-    getButtonState();
-    setButtonState();
-    getButtonState();
+    setPressed(!pressed);
+
+    const body = {
+      newState: pressed,
+    };
+    axios.put(`/Button1`, body);
   };
 
   useEffect(() => {
-    console.log('Use Effect ran.');
-    getButtonState();
+    axios.get(`/Button1`).then((response) => {
+      console.log(response.data);
+      setPressed(response.data.state);
+    });
   }, []);
 
   return (
