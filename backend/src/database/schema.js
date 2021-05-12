@@ -12,6 +12,7 @@ const buttonSchema = new Schema(
       type: Boolean,
       required: [true, 'No state information received.'],
     },
+    clickCount: { type: Number, min: 0 },
   },
   {
     timestamps: {},

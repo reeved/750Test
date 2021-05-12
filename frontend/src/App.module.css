@@ -10,6 +10,15 @@
   z-index: 100;
 }
 
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1em;
+}
+
 .button {
   padding: 1em;
   width: 20vw;
@@ -36,7 +45,8 @@
 
 .credits {
   display: flex;
-  margin-top: 2em;
+  align-items: flex-end;
+  flex-grow: 1;
   z-index: 2;
 }
 

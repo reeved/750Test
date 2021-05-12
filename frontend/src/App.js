@@ -8,12 +8,15 @@ import Particles from 'react-tsparticles';
 
 function App() {
   const [pressed, setPressed] = useState(null);
+  const [nClicks, setClicks] = useState(0);
 
   const handleClick = () => {
     setPressed(!pressed);
 
     const body = {
-      newState: pressed,
+      // Need to set it to !pressed to keep it in sync
+      newState: !pressed,
+      clicks: nClicks + 1,
     };
     axios.put(`/Button1`, body);
   };
@@ -22,6 +25,7 @@ function App() {
     axios.get(`/Button1`).then((response) => {
       console.log(response.data);
       setPressed(response.data.state);
+      setClicks(response.data.clicks);
     });
   }, []);
 
@@ -30,21 +34,25 @@ function App() {
       <Particles params={ParticleConfig} canvasClassName={styles.particles} />
 
       <div className={styles.container}>
-        <div
-          className={`${styles.button} ${pressed ? styles.pressed : ''}`}
-          onClick={() => handleClick()}
-        >
-          {pressed === null ? (
-            <>
-              <Spinner animation='border' />
-              <span>Loading...</span>
-            </>
-          ) : pressed ? (
-            `Button is Pressed`
-          ) : (
-            'Button is Unpressed'
-          )}
+        <div className={styles.buttonContainer}>
+          <div
+            className={`${styles.button} ${pressed ? styles.pressed : ''}`}
+            onClick={() => handleClick()}
+          >
+            {pressed === null ? (
+              <>
+                <Spinner animation='border' />
+                <span>Loading...</span>
+              </>
+            ) : pressed ? (
+              `Button is Pressed`
+            ) : (
+              'Button is Unpressed'
+            )}
+          </div>
+          <h3>{`Button has been clicked ${nClicks} times`}</h3>
         </div>
+
         <div className={styles.credits}>
           <h4>Made by: Reeve D'Cunha (rdcu227)</h4>
         </div>
