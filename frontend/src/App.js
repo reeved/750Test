@@ -26,11 +26,20 @@ function App() {
     axios
       .get(`/Button1`)
       .then((response) => {
+        // GET Request was successful and state data is updated based on response
         console.log('RESPONSE:', response.data);
         setPressed(response.data.state);
         setClicks(response.data.clickCount);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // If the GET Request failed, then it means the buttonName does not exist.
+        console.log(err);
+        console.log('Creating button in the Database.');
+        setPressed(false);
+        setClicks(0);
+        // Creates a new Button in the DB since it didn't exist before
+        axios.post(`/Button1`);
+      });
   }, []);
 
   return (
@@ -54,7 +63,11 @@ function App() {
               'Button is Unpressed'
             )}
           </div>
-          <h3>{`Button has been clicked ${nClicks} times`}</h3>
+          <h3>
+            {pressed === null
+              ? `Loading...`
+              : `Button has been clicked ${nClicks} times`}
+          </h3>
         </div>
 
         <div className={styles.credits}>

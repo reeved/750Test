@@ -30,6 +30,16 @@ async function updateButton(name, body) {
   return false;
 }
 
+async function createButton(name) {
+  try {
+    const dbButton = new Button({ buttonName: name });
+
+    await dbButton.save();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 router.get('/:btnName', async (req, res) => {
   const { btnName } = req.params;
 
@@ -48,6 +58,12 @@ router.put('/:btnName', async (req, res) => {
   const body = req.body;
   const success = await updateButton(btnName, body);
   res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_NOT_FOUND);
+});
+
+router.post('/:btnName', async (req, res) => {
+  const { btnName } = req.params;
+  console.log('POSTING DATA');
+  createButton(btnName);
 });
 
 export default router;

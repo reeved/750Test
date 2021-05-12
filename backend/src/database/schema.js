@@ -10,9 +10,9 @@ const buttonSchema = new Schema(
     },
     state: {
       type: Boolean,
-      required: [true, 'No state information received.'],
+      default: false,
     },
-    clickCount: { type: Number, min: 0 },
+    clickCount: { type: Number, min: 0, default: 0 },
   },
   {
     timestamps: {},
