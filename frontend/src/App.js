@@ -12,6 +12,7 @@ function App() {
 
   const handleClick = () => {
     setPressed(!pressed);
+    setClicks(nClicks + 1);
 
     const body = {
       // Need to set it to !pressed to keep it in sync
@@ -23,9 +24,8 @@ function App() {
 
   useEffect(() => {
     axios.get(`/Button1`).then((response) => {
-      console.log(response.data);
       setPressed(response.data.state);
-      setClicks(response.data.clicks);
+      setClicks(response.data.clickCount);
     });
   }, []);
 

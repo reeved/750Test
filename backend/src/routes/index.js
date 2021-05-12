@@ -11,13 +11,14 @@ async function retrieveButton(name) {
   return await Button.findOne({ buttonName: name });
 }
 
-async function updateButton(name, newState) {
+async function updateButton(name, body) {
   // Retrieves a button from the DB based on its {buttonName} property
   const dbButton = await Button.findOne({ buttonName: name });
 
   if (dbButton) {
     // Updates the button's state
-    dbButton.state = newState;
+    dbButton.state = body.newState;
+    dbButton.clickCount = body.clicks;
 
     // Saves the changes to the DB
     await dbButton.save();
@@ -44,8 +45,8 @@ router.get('/:btnName', async (req, res) => {
 
 router.put('/:btnName', async (req, res) => {
   const { btnName } = req.params;
-  const newState = req.body.newState;
-  const success = await updateButton(btnName, newState);
+  const body = req.body;
+  const success = await updateButton(btnName, body);
   res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_NOT_FOUND);
 });
 
