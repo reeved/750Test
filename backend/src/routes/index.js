@@ -3,9 +3,6 @@ import { Button } from '../database/schema';
 
 const router = express.Router();
 
-// TODO Add some routes here. Remember that if you like, you can import them from other Routers in other files
-// for better code organization.
-const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
 const HTTP_NO_CONTENT = 204;
 
@@ -17,18 +14,18 @@ async function retrieveButton(name) {
 async function updateButton(name, newState) {
   // Retrieves a button from the DB based on its {buttonName} property
   const dbButton = await Button.findOne({ buttonName: name });
-  console.log('Button: ', dbButton, name);
 
   if (dbButton) {
-    console.log('Button State:', dbButton.state);
+    // Updates the button's state
     dbButton.state = newState;
 
+    // Saves the changes to the DB
     await dbButton.save();
-    console.log('Successfully updated Button');
 
     return true;
   }
 
+  // Update fails if no button with the matching name was found
   return false;
 }
 
@@ -36,7 +33,6 @@ router.get('/:btnName', async (req, res) => {
   const { btnName } = req.params;
 
   const button = await retrieveButton(btnName);
-  // console.log('Button: ', button);
 
   if (button) {
     res.json(button);
@@ -44,15 +40,11 @@ router.get('/:btnName', async (req, res) => {
     // No buttons were found with the supplied name
     res.sendStatus(HTTP_NOT_FOUND);
   }
-  // res.json({ message: 'NICE:!' });
-  console.log('GET REQUEST MADE');
 });
 
 router.put('/:btnName', async (req, res) => {
-  console.log('RECEIVED PUT REQUEST:', req.body.newState);
   const { btnName } = req.params;
   const newState = req.body.newState;
-  // article._id = id;
   const success = await updateButton(btnName, newState);
   res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_NOT_FOUND);
 });
