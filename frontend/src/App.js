@@ -1,7 +1,6 @@
-import styles from './App.module.css'
+import styles from './App.module.css';
 
 function App() {
-
   const pressed = 0;
 
   return (
