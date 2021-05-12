@@ -55,7 +55,6 @@ function App() {
             {pressed === null ? (
               <>
                 <Spinner animation='border' />
-                <span>Loading...</span>
               </>
             ) : pressed ? (
               `Button is Pressed`
