@@ -19,6 +19,6 @@ const buttonSchema = new Schema(
   }
 );
 
-const Button = mongoose.model('Button', buttonSchema, 'Buttons');
+const Button = mongoose.model('Button', buttonSchema);
 
 export { Button };
