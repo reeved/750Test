@@ -1,4 +1,5 @@
 # CS732 Quiz Part A - Push the Button
+
 For this test, you will demonstrate your knowledge of all aspects of the MERN stack, by building an extremely simple web application - "Push the Button".
 
 A very barebones skeleton for the frontend and backend has been provided to you. You must implement the majority of the code yourself to meet the requirements set out in this README.
@@ -6,6 +7,7 @@ A very barebones skeleton for the frontend and backend has been provided to you.
 Completion of the requirements in Part A are worth 40 marks and 50% of your grade for the quiz, which is in turn worth 20% of your overall grade for the course (this means Part A is worth 10% of your overall grade, and that parts A and B of this quiz are weighted equally).
 
 ## Submission instructions
+
 To submit, Zip up your project contents and upload the Zip file to Canvas at or before the due date / time.
 
 **Notes:**
@@ -15,6 +17,7 @@ To submit, Zip up your project contents and upload the Zip file to Canvas at or 
 - Make sure your completed `test-part-b.docx` file is included in the Zip, or you risk getting 0 marks for Part B.
 
 ## Requirements
+
 This section details the requirements for the "Push the Button" webapp you must develop for Part A, along with the marks each requirement is worth.
 
 Overall, the webapp should render a graphical representation of a button, which is either pressed or unpressed. Clicking the button should toggle its state. The state of the button should be stored in a MongoDB database, and can be accessed / changed via a RESTful (or REST-like) API over HTTP.
@@ -40,7 +43,8 @@ Overall, the webapp should render a graphical representation of a button, which 
 8. **Something extra (5 marks):** Add something extra to your webapp to allow it to stand out. Comment on the extra feature / improvement / etc you've added here:
 
 ```
-Your answer here.
+1. Added a Click Counter that tracks how many times the button has been clicked.
+2. Added Particles.JS background with particles that interact with your mouse on hover and click
 ```
 
 **Note:** The extra feature doesn't have to be massive (around fifteen minutes of effort should suffice).
