@@ -5,6 +5,12 @@ const router = express.Router();
 const HTTP_NOT_FOUND = 404;
 const HTTP_NO_CONTENT = 204;
 
+router.post('/', async (req, res) => {
+  const { buttonName } = req.body;
+  const button = await buttonDao.createButton(buttonName);
+  res.json(button);
+});
+
 router.get('/:btnName', async (req, res) => {
   const { btnName } = req.params;
 
@@ -27,12 +33,6 @@ router.put('/:btnName', async (req, res) => {
   const body = req.body;
   const success = await buttonDao.updateButton(btnName, body);
   res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_NOT_FOUND);
-});
-
-router.post('/:btnName', async (req, res) => {
-  const { btnName } = req.params;
-  const button = await buttonDao.createButton(btnName);
-  res.json(button);
 });
 
 export default router;

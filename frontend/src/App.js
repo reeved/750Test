@@ -37,8 +37,12 @@ function App() {
         console.log('Creating button in the Database.');
         setPressed(false);
         setClicks(0);
+        const body = {
+          // Need to set it to !pressed to keep it in sync
+          buttonName: 'Button1',
+        };
         // Creates a new Button in the DB since it didn't exist before
-        axios.post(`/Button1`);
+        axios.post(`/`, body);
       });
   }, []);
 

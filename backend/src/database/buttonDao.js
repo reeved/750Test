@@ -16,8 +16,8 @@ export async function updateButton(name, body) {
   return result ? true : false;
 }
 
-export async function createButton(name) {
-  const dbButton = new Button({ buttonName: name });
+export async function createButton(buttonName) {
+  const dbButton = new Button({ buttonName: buttonName });
 
   await dbButton.save();
   return dbButton;
