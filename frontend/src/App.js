@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from 'react-bootstrap/Spinner';
 import ParticleConfig from './particles-config';
 import Particles from 'react-tsparticles';
+import Button from './Components/Button';
 
 function App() {
   const [pressed, setPressed] = useState(null);
@@ -53,16 +54,11 @@ function App() {
           {pressed === null ? (
             <Spinner animation='border' />
           ) : (
-            <>
-              <div
-                className={`${styles.button} ${pressed ? styles.pressed : ''}`}
-                onClick={() => handleClick()}
-              >
-                {pressed ? `Button is Pressed` : 'Button is Unpressed'}
-              </div>
-
-              <h3>{`Button has been clicked ${nClicks} times`}</h3>
-            </>
+            <Button
+              pressed={pressed}
+              nClicks={nClicks}
+              handleClick={handleClick}
+            />
           )}
         </div>
 
