@@ -7,6 +7,7 @@ import { Button } from '../../database/schema';
 
 let mongod, app, server;
 
+// DUMMY BUTTONS - used to populate DB for each test
 const dummyButton2 = {
   buttonName: 'Button2',
   state: true,
@@ -27,7 +28,6 @@ beforeAll(async (done) => {
     .then((cs) => mongoose.connect(cs, { useNewUrlParser: true, poolSize: 1 }));
 
   app = express();
-  // I had to put the two .use methods in this order for my tests to run??
   app.use(express.json());
   app.use('/', routes);
 
@@ -35,11 +35,12 @@ beforeAll(async (done) => {
 });
 
 beforeEach(async () => {
+  // Populates DB with Buttons for tests
   await Button.insertMany([dummyButton2, dummyButton3]);
-  // console.log('RESPONSE FROM INSERTMANY:', resp);
 });
 
 afterEach(async () => {
+  // Cleans up DB to remove any mess from each test
   await Button.deleteMany({});
 });
 
@@ -62,6 +63,7 @@ it('Retrieves a single Button successfully', async () => {
 });
 
 it('Fail to retrieve a nonexistant button', async () => {
+  // Should fail since Button1 shouldn't exist in DB
   try {
     await axios.get('http://localhost:3001/Button1');
     fail('Should have thrown an exception.');
@@ -102,7 +104,6 @@ it('Create a new Button', async () => {
 
 it('Tries to update a button successfully', async () => {
   const body = {
-    // Need to set it to !pressed to keep it in sync
     state: true,
     clickCount: 10,
   };

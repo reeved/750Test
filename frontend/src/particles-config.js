@@ -1,3 +1,4 @@
+// Config file used to modify how the background Particles work
 const particlesConfig = {
   particles: {
     number: {

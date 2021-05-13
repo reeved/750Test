@@ -8,6 +8,7 @@ const buttonSchema = new Schema(
       unique: true,
       required: [true, 'Button name not received.'],
     },
+    // Added default values so that only buttonName is required at creation
     state: {
       type: Boolean,
       default: false,

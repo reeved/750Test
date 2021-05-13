@@ -17,13 +17,12 @@ router.get('/:btnName', async (req, res) => {
   const button = await buttonDao.retrieveButton(btnName);
 
   if (button) {
-    // // Artificially increase send time to show loading indicators on frontend
+    // Artificially increase send time to show loading indicators on frontend
     setTimeout(() => {
       res.json(button);
     }, 1000);
   } else {
     // No buttons were found with the supplied name
-
     res.sendStatus(HTTP_NOT_FOUND);
   }
 });

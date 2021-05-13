@@ -17,6 +17,7 @@ export async function updateButton(name, body) {
 }
 
 export async function createButton(buttonName) {
+  // Inserts a new Button based on its {buttonName} property to the DB
   const dbButton = new Button({ buttonName: buttonName });
 
   await dbButton.save();
