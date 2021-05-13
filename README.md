@@ -45,6 +45,10 @@ Overall, the webapp should render a graphical representation of a button, which 
 ```
 1. Added a Click Counter that tracks how many times the button has been clicked.
 2. Added Particles.JS background with particles that interact with your mouse on hover and click
+
+NOTE:
+Additional Packages installed on frontend:
+- bootstrap, react-bootstrap, react-tsparticles, jest-canvas-mock
 ```
 
 **Note:** The extra feature doesn't have to be massive (around fifteen minutes of effort should suffice).
