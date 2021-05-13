@@ -27,14 +27,12 @@ function App() {
       .get(`/Button1`)
       .then((response) => {
         // GET Request was successful and state data is updated based on response
-        console.log('RESPONSE:', response.data);
         setPressed(response.data.state);
         setClicks(response.data.clickCount);
       })
       .catch((err) => {
         // If the GET Request failed, then it means the buttonName does not exist.
         console.log(err);
-        console.log('Creating button in the Database.');
         setPressed(false);
         setClicks(0);
         const body = {
