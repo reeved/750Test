@@ -6,31 +6,19 @@ export async function retrieveButton(name) {
 }
 
 export async function updateButton(name, body) {
-  // Retrieves a button from the DB based on its {buttonName} property
-  const dbButton = await Button.findOne({ buttonName: name });
+  // Updates a button from the DB based on its {buttonName} property and received update Data
 
-  if (dbButton) {
-    // Updates the button's state
-    dbButton.state = body.newState;
-    dbButton.clickCount = body.clicks;
+  const result = await Button.findOneAndUpdate({ buttonName: name }, body, {
+    new: true,
+    useFindAndModify: false,
+  });
 
-    // Saves the changes to the DB
-    await dbButton.save();
-
-    return true;
-  }
-
-  // Update fails if no button with the matching name was found
-  return false;
+  return result ? true : false;
 }
 
 export async function createButton(name) {
-  try {
-    const dbButton = new Button({ buttonName: name });
+  const dbButton = new Button({ buttonName: name });
 
-    await dbButton.save();
-    return dbButton;
-  } catch (err) {
-    console.log(err);
-  }
+  await dbButton.save();
+  return dbButton;
 }

@@ -16,8 +16,8 @@ function App() {
 
     const body = {
       // Need to set it to !pressed to keep it in sync
-      newState: !pressed,
-      clicks: nClicks + 1,
+      state: !pressed,
+      clickCount: nClicks + 1,
     };
     axios.put(`/Button1`, body);
   };
