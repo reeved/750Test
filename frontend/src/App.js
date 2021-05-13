@@ -8,6 +8,7 @@ import Particles from 'react-tsparticles';
 import Button from './Components/Button';
 
 function App() {
+  // Initialise to null for loading functionality because pressed will always be true/false from DB responses
   const [pressed, setPressed] = useState(null);
   const [nClicks, setClicks] = useState(0);
 
@@ -24,6 +25,7 @@ function App() {
   };
 
   useEffect(() => {
+    // Custom Hook i.e. USEGET not created since this is only run once
     // Get Button data from DB only on initial Page render
     axios
       .get(`/Button1`)
@@ -35,10 +37,11 @@ function App() {
       .catch((err) => {
         // If the GET Request failed, then it means the buttonName does not exist.
         console.log(err);
+        // Initialise button on the frontend
         setPressed(false);
         setClicks(0);
+
         const body = {
-          // Need to set it to !pressed to keep it in sync
           buttonName: 'Button1',
         };
         // Creates a new Button in the DB since it didn't exist before
