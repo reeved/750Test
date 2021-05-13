@@ -24,6 +24,7 @@ function App() {
   };
 
   useEffect(() => {
+    // Get Button data from DB only on initial Page render
     axios
       .get(`/Button1`)
       .then((response) => {
