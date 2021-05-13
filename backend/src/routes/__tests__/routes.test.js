@@ -28,8 +28,8 @@ beforeAll(async (done) => {
 
   app = express();
   // I had to put the two .use methods in this order for my tests to run??
-  app.use('/', routes);
   app.use(express.json());
+  app.use('/', routes);
 
   server = app.listen(3001, () => done());
 });
@@ -73,16 +73,55 @@ it('Fail to retrieve a nonexistant button', async () => {
 });
 
 it('Create a new Button', async () => {
+  const body = {
+    buttonName: 'Button5',
+  };
+
   const response = await axios
-    .post('http://localhost:3001/Button5')
+    .post('http://localhost:3001', body)
     .catch((err) => {
       console.log(err);
       fail('ERROR POSTING');
     });
 
+  // Checks response received by request
   const responseButton = response.data;
   expect(responseButton._id).toBeDefined();
   expect(responseButton.buttonName).toEqual('Button5');
   expect(responseButton.state).toEqual(false);
   expect(responseButton.clickCount).toEqual(0);
+
+  // Verifies that button was actually saved to DB
+  const dbResponse = await axios.get('http://localhost:3001/Button5');
+
+  const dbButton = dbResponse.data;
+  expect(dbButton.buttonName).toEqual('Button5');
+  expect(dbButton.state).toEqual(false);
+  expect(dbButton.clickCount).toEqual(0);
+});
+
+it('Tries to update a button successfully', async () => {
+  const body = {
+    // Need to set it to !pressed to keep it in sync
+    state: true,
+    clickCount: 10,
+  };
+
+  const response = await axios
+    .put('http://localhost:3001/Button2', body)
+    .catch((err) => {
+      console.log(err);
+      fail('ERROR POSTING');
+    });
+
+  // Checks if update was successful
+  expect(response.status).toEqual(204);
+
+  // Verifies that button was actually updated to DB
+  const dbResponse = await axios.get('http://localhost:3001/Button2');
+
+  const dbButton = dbResponse.data;
+  expect(dbButton.buttonName).toEqual('Button2');
+  expect(dbButton.state).toEqual(true);
+  expect(dbButton.clickCount).toEqual(10);
 });
